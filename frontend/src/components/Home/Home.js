@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logo1 from "./tituzent.avif";
+
 import "./Home.css";
 
 function Home() {
@@ -31,10 +31,7 @@ function Home() {
 
         <div className="hero-buttons">
           <Link to="/login" className="primary-btn">
-            Student Login
-          </Link>
-          <Link to="/signup" className="secondary-btn">
-            New Student Signup
+            Get started
           </Link>
         </div>
       </section>
