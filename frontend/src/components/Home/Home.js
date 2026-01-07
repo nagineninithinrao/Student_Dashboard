@@ -5,7 +5,6 @@ import "./Home.css";
 function Home() {
   return (
     <div className="home-hero">
-      {/* NAVBAR */}
       <nav className="navbar">
         <div className="nav-left">
           <span className="college-name">Tituzent School of Learning</span>
@@ -21,7 +20,6 @@ function Home() {
         </div>
       </nav>
 
-      {/* HERO SECTION */}
       <section className="hero-content">
         <h1>Empowering Students for a Smarter Future</h1>
         <p>

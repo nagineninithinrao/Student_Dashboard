@@ -33,12 +33,8 @@ function Dashboard() {
         </div>
 
         <div className="dashboard-actions">
-          <button onClick={() => navigate("/students")}>
-            📋 View Students
-          </button>
-          <button onClick={() => navigate("/students/add")}>
-            ➕ Add Student
-          </button>
+          <button onClick={() => navigate("/students")}>View Students</button>
+          <button onClick={() => navigate("/students/add")}>Add Student</button>
         </div>
       </div>
     </>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "../Header/Header"; // ✅ IMPORT HEADER
+import Header from "../Header/Header";
 import "./StudentTable.css";
 
 function StudentTable() {
@@ -47,10 +47,8 @@ function StudentTable() {
 
   return (
     <>
-      {/* ✅ COMMON HEADER */}
       <Header />
 
-      {/* ✅ PAGE CONTENT */}
       <div className="student-table-container">
         <h2>Student List</h2>
 

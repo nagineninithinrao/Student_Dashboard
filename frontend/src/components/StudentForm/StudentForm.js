@@ -4,7 +4,7 @@ import Header from "../Header/Header";
 import "./StudentForm.css";
 
 function StudentForm() {
-  const { id } = useParams(); // 👈 student id from URL
+  const { id } = useParams();
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
@@ -21,7 +21,6 @@ function StudentForm() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // ✅ FETCH STUDENT DETAILS
   useEffect(() => {
     if (!isEdit) return;
 

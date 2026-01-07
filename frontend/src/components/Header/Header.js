@@ -15,13 +15,10 @@ function Header() {
 
   return (
     <header className="app-header">
-      {/* LEFT */}
       <div className="header-left" onClick={() => navigate("/dashboard")}>
         <img src={logo} alt="Tituzent" className="logo" />
         <span className="school-name">Tituzent School of Learning</span>
       </div>
-
-      {/* CENTER NAV */}
       <nav className="header-nav">
         <button onClick={() => navigate("/dashboard")}>Dashboard</button>
         <button onClick={() => navigate("/students")}>Students</button>
@@ -29,7 +26,6 @@ function Header() {
         <button disabled>Attendance</button>
       </nav>
 
-      {/* RIGHT PROFILE */}
       <div className="header-right">
         <div
           className="profile"

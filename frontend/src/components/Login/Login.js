@@ -32,7 +32,6 @@ function Login() {
         return;
       }
 
-      // Store user (temporary – JWT later)
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
 
