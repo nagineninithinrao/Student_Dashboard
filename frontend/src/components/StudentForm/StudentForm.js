@@ -26,11 +26,14 @@ function StudentForm() {
 
     const fetchStudent = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/students/${id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const res = await fetch(
+          `https://student-dashboard-rihw.onrender.com/api/students/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         if (!res.ok) throw new Error("Fetch failed");
 
@@ -64,8 +67,8 @@ function StudentForm() {
 
     try {
       const url = isEdit
-        ? `http://localhost:5000/api/students/${id}`
-        : "http://localhost:5000/api/students";
+        ? `https://student-dashboard-rihw.onrender.com/api/students/${id}`
+        : "https://student-dashboard-rihw.onrender.com/api/students";
 
       const method = isEdit ? "PUT" : "POST";
 

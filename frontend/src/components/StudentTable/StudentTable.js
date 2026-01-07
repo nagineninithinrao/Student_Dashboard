@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
 import "./StudentTable.css";
+import { useCallback } from "react";
 
 function StudentTable() {
   const [students, setStudents] = useState([]);
@@ -11,26 +12,29 @@ function StudentTable() {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
-  const fetchStudents = () => {
-    fetch("http://localhost:5000/api/students", {
+  const fetchStudents = useCallback(() => {
+    fetch("https://student-dashboard-rihw.onrender.com/api/students", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())
       .then((data) => setStudents(data.students || []))
       .catch(() => setStudents([]));
-  };
+  }, [token]);
 
   useEffect(() => {
     fetchStudents();
-  }, [token]);
+  }, [fetchStudents]);
 
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this student?")) return;
 
-    await fetch(`http://localhost:5000/api/students/${id}`, {
-      method: "DELETE",
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    await fetch(
+      `https://student-dashboard-rihw.onrender.com/api/students/${id}`,
+      {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
 
     fetchStudents();
   };

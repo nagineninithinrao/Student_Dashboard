@@ -35,19 +35,22 @@ function Signup() {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/auth/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          dob,
-          gender,
-          password,
-        }),
-      });
+      const response = await fetch(
+        "https://student-dashboard-rihw.onrender.com/api/auth/signup",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            dob,
+            gender,
+            password,
+          }),
+        }
+      );
 
       const data = await response.json();
 

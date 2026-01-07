@@ -10,7 +10,7 @@ function Dashboard() {
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/students", {
+    fetch("https://student-dashboard-rihw.onrender.com/api/students", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/images/tituzent.avif";
 import "./AddStudent.css";
-
+import { useCallback } from "react";
 function AddStudent() {
   const navigate = useNavigate();
 
@@ -29,11 +29,14 @@ function AddStudent() {
     if (photo) data.append("photo", photo);
 
     try {
-      const res = await fetch("http://localhost:5000/api/students", {
-        method: "POST",
-        headers: { Authorization: `Bearer ${token}` },
-        body: data,
-      });
+      const res = await fetch(
+        "https://student-dashboard-rihw.onrender.com/api/students",
+        {
+          method: "POST",
+          headers: { Authorization: `Bearer ${token}` },
+          body: data,
+        }
+      );
 
       if (!res.ok) throw new Error("Failed to add student");
 
