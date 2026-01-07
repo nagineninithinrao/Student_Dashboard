@@ -33,9 +33,10 @@ function Login() {
       }
 
       // Store user (temporary – JWT later)
+      localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
 
-      navigate("/dashboard");
+      navigate("/Dashboard");
     } catch (err) {
       setError("Server error. Please try again later.");
     }

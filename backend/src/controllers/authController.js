@@ -1,8 +1,8 @@
-const User = require("../models/User");
-const bcrypt = require("bcryptjs");
+import User from "../models/User.js";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
-/* ================= SIGNUP ================= */
-exports.signup = async (req, res) => {
+export const signup = async (req, res) => {
   try {
     const { name, email, dob, gender, password } = req.body;
 
@@ -10,47 +10,34 @@ exports.signup = async (req, res) => {
       return res.status(400).json({ message: "All fields are required" });
     }
 
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
+    const exists = await User.findOne({ email });
+    if (exists) {
       return res.status(400).json({ message: "Email already registered" });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashed = await bcrypt.hash(password, 10);
 
-    const user = await User.create({
+    await User.create({
       name,
       email,
-      dob: new Date(dob),
+      dob,
       gender,
-      password: hashedPassword,
+      password: hashed,
     });
 
-    return res.status(201).json({
-      message: "Signup successful",
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        dob: user.dob,
-        gender: user.gender,
-      },
-    });
-  } catch (error) {
-    console.error("SIGNUP ERROR:", error);
-    return res.status(500).json({
-      message: "Server error",
-      error: error.message,
-    });
+    res.status(201).json({ message: "Signup successful" });
+  } catch (err) {
+    console.error("Signup Error:", err);
+    res.status(500).json({ message: "Server error" });
   }
 };
 
-/* ================= LOGIN ================= */
-exports.login = async (req, res) => {
+export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
     if (!email || !password) {
-      return res.status(400).json({ message: "All fields are required" });
+      return res.status(400).json({ message: "All fields required" });
     }
 
     const user = await User.findOne({ email });
@@ -58,24 +45,24 @@ exports.login = async (req, res) => {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
-    return res.json({
-      message: "Login successful",
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "1d",
+    });
+
+    res.json({
+      token,
       user: {
         id: user._id,
-        name: user.name,
         email: user.email,
       },
     });
-  } catch (error) {
-    console.error("LOGIN ERROR:", error);
-    return res.status(500).json({
-      message: "Server error",
-      error: error.message,
-    });
+  } catch (err) {
+    console.error("Login Error:", err);
+    res.status(500).json({ message: "Server error" });
   }
 };
