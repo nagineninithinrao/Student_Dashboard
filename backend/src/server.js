@@ -10,7 +10,16 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "https://your-frontend-domain.onrender.com",
+    ],
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 app.use("/uploads", express.static("uploads"));
 
