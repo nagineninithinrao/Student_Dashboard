@@ -98,7 +98,7 @@ function StudentTable() {
                     <td>
                       {s.photo ? (
                         <img
-                          src={`http://localhost:5000${s.photo}`}
+                          src={`https://student-dashboard-rihw.onrender.com${s.photo}`}
                           className="student-photo"
                           alt="student"
                         />

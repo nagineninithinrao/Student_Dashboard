@@ -14,7 +14,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
-      "https://your-frontend-domain.onrender.com",
+      "https://student-dashboard-1-fcs8.onrender.com",
     ],
     credentials: true,
   })
@@ -29,12 +29,7 @@ app.use("/api/students", studentRoutes);
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("✅ MongoDB Connected"))
-  .catch((err) => {
-    console.error("MongoDB Error:", err);
-    process.exit(1);
-  });
-const PORT = process.env.PORT || 5000;
+  .catch(console.error);
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-});
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));

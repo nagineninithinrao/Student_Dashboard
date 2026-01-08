@@ -6,7 +6,7 @@ const studentSchema = new mongoose.Schema(
     email: { type: String, required: true },
     class: { type: String, required: true },
     feesStatus: { type: String, default: "Paid" },
-    photo: { type: String },
+    photo: String,
   },
   { timestamps: true }
 );
