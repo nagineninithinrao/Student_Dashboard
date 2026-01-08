@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { FcGoogle } from "react-icons/fc";
+import { IoLogoApple } from "react-icons/io5";
 import logo from "../../assets/images/tituzent.avif";
-import "../../Styles/App.css";
+import "../../Styles/Auth.css";
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -17,95 +19,85 @@ function Login() {
     setError("");
 
     try {
-      const response = await fetch(
+      const res = await fetch(
         "https://student-dashboard-rihw.onrender.com/api/auth/login",
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email, password }),
         }
       );
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        setError(data.message || "Login failed");
-        return;
-      }
+      const data = await res.json();
+      if (!res.ok) return setError(data.message);
 
       localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
-
-      navigate("/Dashboard");
-    } catch (err) {
-      setError("Server error. Please try again later.");
+      navigate("/dashboard");
+    } catch {
+      setError("Server error. Please try again.");
     }
   };
 
   return (
-    <div id="hero">
-      <div className="page-wrapper">
-        <h1 id="school-Name">Tituzent School of Learning</h1>
+    <div className="auth-hero">
+      <div className="auth-wrapper">
+        <h1 className="auth-title">Tituzent School of Learning</h1>
 
-        <div id="grid-container">
-          <div id="grid-container1">
-            <img src={logo} id="image" alt="Logo" />
+        <div className="auth-grid">
+          <div className="auth-logo">
+            <img src={logo} alt="logo" />
           </div>
 
-          <div id="grid-container2">
-            <div id="loginform">
-              <h2>Welcome Back 👋</h2>
+          <div className="auth-card">
+            <h2>Welcome Back 👋</h2>
 
-              <form onSubmit={handleLogin}>
-                <label>Email Address</label>
+            <form onSubmit={handleLogin}>
+              <label>Email Address</label>
+              <input
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+
+              <label>Password</label>
+              <div className="password-wrapper">
                 <input
-                  type="email"
-                  placeholder="Enter your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   required
                 />
+                <span
+                  className="eye-icon"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+                </span>
+              </div>
 
-                <label>Password</label>
-                <div className="password-wrapper">
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    placeholder="Enter password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                  />
-                  <span
-                    className="eye-icon"
-                    onClick={() => setShowPassword(!showPassword)}
-                  >
-                    {showPassword ? (
-                      <AiOutlineEyeInvisible />
-                    ) : (
-                      <AiOutlineEye />
-                    )}
-                  </span>
-                </div>
+              {error && <p className="error">{error}</p>}
 
-                <div className="forgot-wrapper">
-                  <Link to="/forgot-password" className="forgot-link">
-                    Forgot password?
-                  </Link>
-                </div>
+              <button className="primary-btn">Log In</button>
 
-                {error && <p style={{ color: "red" }}>{error}</p>}
+              <div className="divider">OR</div>
 
-                <button id="login" type="submit">
-                  Log In
-                </button>
+              <button className="social-btn" disabled>
+                <FcGoogle /> Continue with Google
+                <span className="coming-soon">Coming Soon</span>
+              </button>
 
-                <p className="signup-text">
-                  Don’t have an account? <Link to="/signup">Sign up</Link>
-                </p>
-              </form>
-            </div>
+              <button className="social-btn" disabled>
+                <IoLogoApple /> Continue with Apple
+                <span className="coming-soon">Coming Soon</span>
+              </button>
+
+              <p className="auth-footer">
+                Don’t have an account? <Link to="/signup">Sign up</Link>
+              </p>
+            </form>
           </div>
         </div>
       </div>

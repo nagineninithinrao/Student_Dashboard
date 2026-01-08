@@ -40,27 +40,6 @@ body {
   text-align: center;
 }
 
-/* ================= GRID ================= */
-#grid-container {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: center;
-}
-
-#grid-container1,
-#grid-container2 {
-  display: flex;
-  justify-content: center;
-}
-
-/* ================= LOGO ================= */
-#image {
-  max-width: 260px;
-  width: 100%;
-}
-
 /* ================= FORM CARD ================= */
 #loginform {
   width: 100%;
@@ -84,7 +63,7 @@ label {
   font-weight: 600;
 }
 
-/* ✅ INPUT FIX */
+/* INPUTS */
 input,
 select {
   width: 100%;
@@ -101,7 +80,6 @@ select {
 }
 
 .password-wrapper input {
-  width: 100%;
   padding-right: 42px;
 }
 
@@ -127,7 +105,7 @@ select {
 
 /* ================= BUTTON ================= */
 button {
-  width: 100%; /* ✅ FIXED */
+  width: 100%;
   padding: 12px;
   border-radius: 10px;
   border: none;
@@ -152,18 +130,7 @@ button {
   font-size: 14px;
 }
 
-/* ================= MOBILE FIX ================= */
-@media (max-width: 900px) {
-  #grid-container {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-
-  #grid-container1 {
-    display: none;
-  }
-}
-
+/* ================= MOBILE ================= */
 @media (max-width: 480px) {
   #school-Name {
     font-size: 22px;
